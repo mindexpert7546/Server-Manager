@@ -9,6 +9,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { TagModule } from 'primeng/tag';
 import { FormsModule } from '@angular/forms';
 import { TooltipModule } from 'primeng/tooltip';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     ToolbarModule,
+    HttpClientModule,
     ButtonModule,
     SplitButtonModule,
     TableModule,

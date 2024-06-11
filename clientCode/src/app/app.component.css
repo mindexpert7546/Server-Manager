@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+.container {
+    width: 100%;
+    min-height: 90;
+}
+ 
+.containt {
+    width: 90%;
+    min-height: 90vh;
+    margin: auto;
+}
+ 
+.custom-row-height {
+    height: 4rem;
+}
+
+.tableitems{
+    width: 95%;
+    min-height: 80vh;
+    margin: auto;
+}
+
+.round-image {
+    width: 40px; 
+    height: 40px; 
+    /* border-radius: 50%;  */
+    object-fit: cover;
+}
