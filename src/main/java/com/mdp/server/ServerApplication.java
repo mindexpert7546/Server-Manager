@@ -35,11 +35,19 @@ public class ServerApplication {
 			serverRepo.save(new Server(null, "192.168.1.160","Ubuntu Linux", "16 GB", "Personal PC",
 					"http://localhost:8080/server/image/server1.jpeg", Status.SERVER_UP));
 			serverRepo.save(new Server(null, "192.168.1.58","Window Linux", "64 GB", "Personal PC",
-					"http://localhost:8080/server/image/server2.jpeg", Status.SERVER_UP));
+					"http://localhost:8080/server/image/server2.jpeg", Status.SERVER_DOWN));
 			serverRepo.save(new Server(null, "192.168.1.21","Windwo Linux", "16 GB", "Personal PC",
 					"http://localhost:8080/server/image/server3.jpeg", Status.SERVER_UP));
 			serverRepo.save(new Server(null, "192.168.1.14","Ubuntu Linux", "32 GB", "Desktop PC",
+					"http://localhost:8080/server/image/server2.jpeg", Status.SERVER_DOWN));
+			serverRepo.save(new Server(null, "192.168.1.166","Ubuntu Linux", "16 GB", "Personal PC",
+					"http://localhost:8080/server/image/server1.jpeg", Status.SERVER_DOWN));
+			serverRepo.save(new Server(null, "192.168.1.34","Window Linux", "64 GB", "Personal PC",
 					"http://localhost:8080/server/image/server2.jpeg", Status.SERVER_UP));
+			serverRepo.save(new Server(null, "192.168.1.341","Windwo Linux", "16 GB", "Personal PC",
+					"http://localhost:8080/server/image/server3.jpeg", Status.SERVER_UP));
+			serverRepo.save(new Server(null, "192.168.1.987","Ubuntu Linux", "32 GB", "Desktop PC",
+					"http://localhost:8080/server/image/server2.jpeg", Status.SERVER_DOWN));
 		};
 	}
 }

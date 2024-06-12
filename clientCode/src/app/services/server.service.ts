@@ -62,13 +62,13 @@ export class ServerService {
           message: `Server filter by: ${status} status`
         });
       } else {
-        const filteredServers = response.data.servers.filter(server => server.status === status);
+        const filteredServers = response.data.Server.filter(server => server.status === status);
         subscriber.next({
           ...response,
           message: filteredServers.length > 0 ?
             `Server filter by ${status === Status.SERVER_UP ? 'SERVER_UP' : 'SERVER_DOWN'} status` :
             `No server of ${status} found`,
-          data: { servers: filteredServers }
+          data: { Server: filteredServers }
         });
       }
 

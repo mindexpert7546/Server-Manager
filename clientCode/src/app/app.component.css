@@ -31,3 +31,20 @@
     /* border-radius: 50%;  */
     object-fit: cover;
 }
+
+.statusUp{
+    color: #090000;
+    animation: glow 1s ease-in-out infinite alternate;
+    background-color: rgb(22, 244, 2);
+    border-radius: 5px;
+    font-size: larger;
+  }
+  
+.statusDown{
+  color: #090000;
+  animation: glow 1s ease-in-out infinite alternate;
+  background-color: rgb(244, 2, 2);
+  border-radius: 5px;
+  font-size: larger;
+}
+
