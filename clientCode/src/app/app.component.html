@@ -1,13 +1,13 @@
 <!-- <div>{{appState$ | async | json}}</div> -->
 <div class="container">
-  <div class="containt ">
+  <div class="containt">
     <p-toolbar  styleClass="bg-primary-700 mb-6" >
       <div class="p-toolbar-group-start">
         <h1 class="text-50">Manage Server</h1>
       </div>
       <div class="p-toolbar-group-end">
         <div class="flex justify-content-center flex-wrap">
-          <p-splitButton class="m-2" label="All" tooltipPosition="bottom" [pTooltip]="getTypeOfServerToolTipName()" (onClick)="save('info')" [model]="items" severity="info" />
+          <p-splitButton class="m-2" label="All" appendTo="body" tooltipPosition="bottom" [pTooltip]="getTypeOfServerToolTipName()"  [model]="items" severity="info" />
           <p-button label="Add Server" tooltipPosition="bottom" [pTooltip]="getAddServerToolTipName()" severity="success" icon="pi pi-plus" class="m-2" />
           <p-button label="Excel Export" tooltipPosition="bottom" [pTooltip]="getExcelExpertToolTipName()" class="m-2" icon="pi pi-file-excel" />
         </div>
@@ -19,7 +19,7 @@
         <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
       </div>
       <p-table 
-      [value]="appState.appData.data.Server"
+      [value]="appState?.appData?.data?.Server"
       styleClass="p-datatable-striped" 
       *ngSwitchCase="DataState.LOADED_STATE"
       [tableStyle]="{'min-width': '50rem'}">
@@ -48,7 +48,14 @@
                     </span>
 
                   </td>
-                  <td><p-button tooltipPosition="top" [pTooltip]="getPingToolTipName()" icon="pi pi-wifi" [severity]="Status.SERVER_UP === server.status ? 'success': 'secondary' " /></td>
+                  <td (click)="pingServer(server.ipAddress)">
+                    <i *ngIf="(filterStatus$ | async) === '' || (filterStatus$ | async) !== server.ipAddress">
+                      <p-button tooltipPosition="top" [pTooltip]="getPingToolTipName()" icon="pi pi-wifi" [severity]="Status.SERVER_UP === server.status ? 'success': 'secondary' " />
+                    </i>
+                    <span *ngIf="(filterStatus$ | async) === server.ipAddress">
+                      <i class="pi pi-spin pi-spinner-dotted" style="font-size: 2rem"></i>
+                    </span>
+                  </td>
                   <td><p-button tooltipPosition="top" [pTooltip]="getDeleteToolTipName()" icon="pi pi-trash" severity="danger"/></td>
               </tr>
           </ng-template>

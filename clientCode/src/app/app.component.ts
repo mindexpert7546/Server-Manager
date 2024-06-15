@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerService } from './services/server.service';
-import { Observable, catchError, map, of, startWith } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, of, startWith } from 'rxjs';
 import { AppState } from './interface/app-state';
 import { CustomResponse } from './interface/custom-response';
 import { DataState } from './enum/data-state.enum';
-import { Message } from 'primeng/api';
+import { MenuItem, Message } from 'primeng/api';
 import { Status } from './enum/status.enum';
+
 
 
 @Component({
@@ -18,15 +19,38 @@ export class AppComponent  implements OnInit{
   readonly DataState = DataState;
   readonly Status = Status
   messages: Message[] | undefined;
-server: any;
+  server: any;
+  items: MenuItem[] = [];
+  private filterSubject = new BehaviorSubject<string>('');
+  private dataSubject = new BehaviorSubject<CustomResponse>(null);
 
- constructor(private serverService:ServerService){}
+  filterStatus$ = this.filterSubject.asObservable();
+
+ constructor(private serverService:ServerService){
+  this.items = [
+    {
+      label:"Server Up",
+      command: () => {
+        this.serverUp();
+     }
+    },
+    {
+      label:"Server Down",
+      command: () => {
+        this.serverDown();
+      }
+    },
+    { separator: true },
+  ];
+ }
 
 
   ngOnInit(): void {
+  
    this.appState$ = this.serverService.server$
    .pipe(
     map(response =>{
+      this.dataSubject.next(response);
       return { dataState : DataState.LOADED_STATE, appData: response }
     }),
     startWith({ dataState : DataState.LOADING_STATE}),
@@ -39,14 +63,38 @@ server: any;
    ];
   }
 
-  save(arg0: string) {
-    throw new Error('Method not implemented.');
+  pingServer(ipAddress: string ): void {
+    this.filterSubject.next(ipAddress);
+    this.appState$ = this.serverService.ping$(ipAddress)
+    .pipe(
+     map(response =>{
+      this.dataSubject.value.data.Server[
+        this.dataSubject.value.data.Server.findIndex(server =>{
+          server.id === response.data.server.id
+        })
+      ] = response.data.server;
+      this.filterSubject.next('');
+       return { dataState : DataState.LOADED_STATE, appData: response }
+     }),
+     startWith({ dataState : DataState.LOADED_STATE,appData: this.dataSubject.value }),
+     catchError((error:string) => {
+      this.filterSubject.next('');
+       return of({ dataState : DataState.LOADED_STATE, error})
+     })
+    );
+
+    this.messages = [
+     { severity: 'error', detail: 'Error' },
+    ];
+   }
+
+    serverUp(){
+
     }
-    items:any = [
-      {label:"Server Up"},
-      {label:"Server Down"}
-    ]
-    
+
+    serverDown(){
+
+    }
     getAddServerToolTipName(){
       return "Add new Server";
     }

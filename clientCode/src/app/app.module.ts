@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { TooltipModule } from 'primeng/tooltip';
 import { HttpClientModule } from '@angular/common/http';
 import { MessagesModule } from 'primeng/messages';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,7 +34,9 @@ import { AppComponent } from './app.component';
     TagModule,
     FormsModule,
     TooltipModule,
-    MessagesModule
+    MessagesModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
